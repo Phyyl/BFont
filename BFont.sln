@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFont.Forms", "BFont.Forms\BFont.Forms.csproj", "{4D3F5C11-C33B-4F6B-A175-DF7053C97877}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFont", "BFont\BFont.csproj", "{92A59620-F257-4B47-AB68-638DD7BBCDA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D3F5C11-C33B-4F6B-A175-DF7053C97877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3F5C11-C33B-4F6B-A175-DF7053C97877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3F5C11-C33B-4F6B-A175-DF7053C97877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3F5C11-C33B-4F6B-A175-DF7053C97877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A59620-F257-4B47-AB68-638DD7BBCDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A59620-F257-4B47-AB68-638DD7BBCDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A59620-F257-4B47-AB68-638DD7BBCDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A59620-F257-4B47-AB68-638DD7BBCDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E25AB3CB-3B57-4C63-8F3C-926B1D0D8BE7}
+	EndGlobalSection
+EndGlobal
