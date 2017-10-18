@@ -39,7 +39,7 @@ namespace BFont.Forms
 				return;
 			}
 
-			currentFont = BFont.FromFile(path, textRenderText.Text, (int)numericSize.Value, 8, int.Parse((string)comboPageSize.SelectedItem));
+			currentFont = BFont.FromFile(path, textRenderText.Text, (int)numericSize.Value, 10, int.Parse((string)comboPageSize.SelectedItem));
 
 			panelRender.Invalidate();
 		}
@@ -55,7 +55,7 @@ namespace BFont.Forms
 			listSystem.SelectedItem = FontPath.SystemFonts.FirstOrDefault(p => p.Name == "Arial");
 			listSystem.DisplayMember = "Name";
 
-			comboPageSize.SelectedIndex = 0;
+			comboPageSize.SelectedIndex = 2;
 
 			UpdateLoadMode(true);
 		}
