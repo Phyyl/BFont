@@ -29,7 +29,7 @@ namespace BFont
 				return FromFace(face, characters, size, pageSize, renderGlyph =>
 				{
 					AddPadding(renderGlyph, padding);
-					GenerateSignedDistanceField(renderGlyph, padding - 1);
+					//GenerateSignedDistanceField(renderGlyph, padding - 1);
 				});
 			}
 		}
