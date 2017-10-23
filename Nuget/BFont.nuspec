@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BFont</id>
+    <version>1.0.0</version>
+    <authors>Phyyl</authors>
+    <owners>Phyyl</owners>
+    <licenseUrl>https://github.com/Phyyl/BFont/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Phyyl/BFont/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <releaseNotes>Font bitmap generator</releaseNotes>
+    <copyright>Copyright (c) 2017 Philippe Paré</copyright>
+    <tags>font opentk opengl ttf</tags>
+  </metadata>
+</package>
