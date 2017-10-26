@@ -39,18 +39,21 @@
 			this.textRenderText = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.numericPadding = new System.Windows.Forms.NumericUpDown();
+			this.label3 = new System.Windows.Forms.Label();
+			this.numericDistanceField = new System.Windows.Forms.NumericUpDown();
 			this.comboPageSize = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.numericSize = new System.Windows.Forms.NumericUpDown();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.buttonExport = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericPadding)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericDistanceField)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericSize)).BeginInit();
-			this.groupBox5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -172,16 +175,64 @@
 			// groupBox4
 			// 
 			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox4.Controls.Add(this.label4);
+			this.groupBox4.Controls.Add(this.numericPadding);
+			this.groupBox4.Controls.Add(this.label3);
+			this.groupBox4.Controls.Add(this.numericDistanceField);
 			this.groupBox4.Controls.Add(this.comboPageSize);
 			this.groupBox4.Controls.Add(this.label2);
 			this.groupBox4.Controls.Add(this.label1);
 			this.groupBox4.Controls.Add(this.numericSize);
 			this.groupBox4.Location = new System.Drawing.Point(750, 12);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(171, 72);
+			this.groupBox4.Size = new System.Drawing.Size(171, 159);
 			this.groupBox4.TabIndex = 4;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Settings";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(6, 74);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(46, 13);
+			this.label4.TabIndex = 9;
+			this.label4.Text = "Padding";
+			// 
+			// numericPadding
+			// 
+			this.numericPadding.Location = new System.Drawing.Point(86, 72);
+			this.numericPadding.Maximum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+			this.numericPadding.Name = "numericPadding";
+			this.numericPadding.Size = new System.Drawing.Size(79, 20);
+			this.numericPadding.TabIndex = 8;
+			this.numericPadding.ValueChanged += new System.EventHandler(this.numericPadding_ValueChanged);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(6, 101);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(74, 13);
+			this.label3.TabIndex = 6;
+			this.label3.Text = "Distance Field";
+			// 
+			// numericDistanceField
+			// 
+			this.numericDistanceField.Location = new System.Drawing.Point(86, 99);
+			this.numericDistanceField.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+			this.numericDistanceField.Name = "numericDistanceField";
+			this.numericDistanceField.Size = new System.Drawing.Size(79, 20);
+			this.numericDistanceField.TabIndex = 5;
+			this.numericDistanceField.ValueChanged += new System.EventHandler(this.numericDistanceField_ValueChanged);
 			// 
 			// comboPageSize
 			// 
@@ -192,9 +243,9 @@
             "1024",
             "2048",
             "4096"});
-			this.comboPageSize.Location = new System.Drawing.Point(67, 45);
+			this.comboPageSize.Location = new System.Drawing.Point(86, 45);
 			this.comboPageSize.Name = "comboPageSize";
-			this.comboPageSize.Size = new System.Drawing.Size(98, 21);
+			this.comboPageSize.Size = new System.Drawing.Size(79, 21);
 			this.comboPageSize.TabIndex = 4;
 			this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
 			// 
@@ -218,7 +269,7 @@
 			// 
 			// numericSize
 			// 
-			this.numericSize.Location = new System.Drawing.Point(67, 19);
+			this.numericSize.Location = new System.Drawing.Point(86, 19);
 			this.numericSize.Maximum = new decimal(new int[] {
             128,
             0,
@@ -230,7 +281,7 @@
             0,
             0});
 			this.numericSize.Name = "numericSize";
-			this.numericSize.Size = new System.Drawing.Size(98, 20);
+			this.numericSize.Size = new System.Drawing.Size(79, 20);
 			this.numericSize.TabIndex = 0;
 			this.numericSize.Value = new decimal(new int[] {
             32,
@@ -239,31 +290,11 @@
             0});
 			this.numericSize.ValueChanged += new System.EventHandler(this.numericSize_ValueChanged);
 			// 
-			// groupBox5
-			// 
-			this.groupBox5.Controls.Add(this.buttonExport);
-			this.groupBox5.Location = new System.Drawing.Point(750, 90);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(171, 81);
-			this.groupBox5.TabIndex = 5;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Actions";
-			// 
-			// buttonExport
-			// 
-			this.buttonExport.Location = new System.Drawing.Point(90, 50);
-			this.buttonExport.Name = "buttonExport";
-			this.buttonExport.Size = new System.Drawing.Size(75, 23);
-			this.buttonExport.TabIndex = 0;
-			this.buttonExport.Text = "Export";
-			this.buttonExport.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(933, 783);
-			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
@@ -279,8 +310,9 @@
 			this.groupBox3.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericPadding)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericDistanceField)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericSize)).EndInit();
-			this.groupBox5.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -302,7 +334,9 @@
 		private System.Windows.Forms.NumericUpDown numericSize;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox comboPageSize;
-		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.Button buttonExport;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.NumericUpDown numericDistanceField;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.NumericUpDown numericPadding;
 	}
 }

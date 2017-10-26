@@ -35,7 +35,14 @@ namespace BFontCore.Forms
 				return;
 			}
 
-			currentFont = BFont.FromFile(path, textRenderText.Text, (int)numericSize.Value, 10, int.Parse((string)comboPageSize.SelectedItem));
+			currentFont = BFont.FromFile(path, new BFontOptions
+			{
+				Characters = textRenderText.Text,
+				DistanceField = (int)numericDistanceField.Value,
+				Padding = (int)numericPadding.Value,
+				Size = (int)numericSize.Value,
+				PageSize = int.Parse((string)comboPageSize.SelectedItem)
+			});
 
 			panelRender.Invalidate();
 		}
@@ -44,7 +51,7 @@ namespace BFontCore.Forms
 		{
 			SetFont(fontPath);
 		}
-		
+
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			listSystem.Items.AddRange(FontPath.SystemFonts);
@@ -109,6 +116,21 @@ namespace BFontCore.Forms
 		}
 
 		private void comboPageSize_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			UpdateFont();
+		}
+
+		private void checkLcd_CheckedChanged(object sender, EventArgs e)
+		{
+			UpdateFont();
+		}
+
+		private void numericDistanceField_ValueChanged(object sender, EventArgs e)
+		{
+			UpdateFont();
+		}
+
+		private void numericPadding_ValueChanged(object sender, EventArgs e)
 		{
 			UpdateFont();
 		}
