@@ -9,8 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
-namespace BFont.Forms
+namespace BFontCore.Forms
 {
 	public partial class MainForm : Form
 	{
@@ -68,7 +69,7 @@ namespace BFont.Forms
 			}
 
 			e.Graphics.Clear(Color.Black);
-			e.Graphics.DrawImageUnscaled(currentFont.Pages[0], Point.Empty);
+			e.Graphics.DrawImageUnscaled(currentFont.Pages[0].ToBitmap(), Point.Empty);
 		}
 
 		private void buttonFile_Click(object sender, EventArgs e)

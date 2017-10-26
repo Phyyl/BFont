@@ -2,25 +2,31 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BFont
+namespace BFontCore
 {
 	public class BFont
 	{
-		private static readonly Library library = new Library();
+		private static Library library;
 
 		public BGlyph[] Glyphs { get; set; }
-		public Bitmap[] Pages { get; set; }
+		public BBitmap[] Pages { get; set; }
 		public string Name { get; set; }
 		public int LineHeight { get; set; }
 		public bool IsBold { get; set; }
 		public bool IsItalic { get; set; }
 		public bool IsDistanceField { get; set; }
+
+		static BFont()
+		{
+			NativeLibraryHelper.LoadEmbeddedLibrary("BFontCore", "freetype6.dll");
+
+			library = new Library();
+		}
 
 		public static BFont FromFile(string path, string characters, int size, int padding, int pageSize)
 		{
@@ -39,10 +45,9 @@ namespace BFont
 			int width = Math.Max(0, renderGlyph.Bitmap.Width + padding * 2);
 			int height = Math.Max(0, renderGlyph.Bitmap.Height + padding * 2);
 
-			Bitmap result = new Bitmap(width, height);
-			Graphics graphics = Graphics.FromImage(result);
+			BBitmap result = new BBitmap(width, height);
 
-			graphics.DrawImageUnscaled(renderGlyph.Bitmap, new Point(padding, padding));
+			result.Draw(renderGlyph.Bitmap, padding, padding);
 
 			renderGlyph.Info.XOffset += padding;
 			renderGlyph.Info.YOffset = height;
@@ -50,68 +55,66 @@ namespace BFont
 			renderGlyph.Bitmap = result;
 		}
 
-		private unsafe static void GenerateSignedDistanceField(RenderGlyph renderGlyph, int spread)
-		{
-			int width = renderGlyph.Bitmap.Width;
-			int height = renderGlyph.Bitmap.Height;
-			
-			BitmapData bitmapData = renderGlyph.Bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+		//private static void GenerateSignedDistanceField(RenderGlyph renderGlyph, int spread)
+		//{
+		//	int width = renderGlyph.Bitmap.Width;
+		//	int height = renderGlyph.Bitmap.Height;
 
-			int bufferLength = bitmapData.Height * bitmapData.Stride;
+		//	int bufferLength = bitmapData.Height * bitmapData.Stride;
 
-			uint* input = (uint*)bitmapData.Scan0;
-			uint* output = (uint*)(Marshal.AllocHGlobal(bufferLength));
+		//	uint* input = (uint*)bitmapData.Scan0;
+		//	uint* output = (uint*)(Marshal.AllocHGlobal(bufferLength));
 
-			for (int x = 0; x < width; x++)
-			{
-				for (int y = 0; y < height; y++)
-				{
-					uint color = input[x + y * width];
+		//	for (int x = 0; x < width; x++)
+		//	{
+		//		for (int y = 0; y < height; y++)
+		//		{
+		//			uint color = input[x + y * width];
 
-					bool inside = (color >> 24 & 0xff) != 0;
-					int distanceSquared = int.MaxValue;
+		//			bool inside = (color >> 24 & 0xff) != 0;
+		//			int distanceSquared = int.MaxValue;
 
-					for (int dx = -spread; dx <= spread; dx++)
-					{
-						for (int dy = -spread; dy <= spread; dy++)
-						{
-							int sx = x + dx;
-							int sy = y + dy;
+		//			for (int dx = -spread; dx <= spread; dx++)
+		//			{
+		//				for (int dy = -spread; dy <= spread; dy++)
+		//				{
+		//					int sx = x + dx;
+		//					int sy = y + dy;
 
-							if (dx == 0 || dy == 0 || sx < 0 || sx >= width || sy < 0 || sy >= height)
-							{
-								continue;
-							}
+		//					if (dx == 0 || dy == 0 || sx < 0 || sx >= width || sy < 0 || sy >= height)
+		//					{
+		//						continue;
+		//					}
 
-							uint compareColor = input[sx + sy * width];
-							bool compareInside = (compareColor >> 24 & 0xff) != 0;
+		//					uint compareColor = input[sx + sy * width];
+		//					bool compareInside = (compareColor >> 24 & 0xff) != 0;
 
-							if (compareInside ^ inside)
-							{
-								int compareDistanceSquared = dx * dx + dy * dy;
+		//					if (compareInside ^ inside)
+		//					{
+		//						int compareDistanceSquared = dx * dx + dy * dy;
 
-								if (compareDistanceSquared < distanceSquared)
-								{
-									distanceSquared = compareDistanceSquared;
-								}
-							}
-						}
-					}
+		//						if (compareDistanceSquared < distanceSquared)
+		//						{
+		//							distanceSquared = compareDistanceSquared;
+		//						}
+		//					}
+		//				}
+		//			}
 
-					float distance = inside ? 0 : (float)Math.Sqrt(distanceSquared);
-					distance = MathHelper.Clamp(distance, 0, spread);
-					byte alpha = (byte)(255 - (distance / spread) * 255);
+		//			float distance = inside ? 0 : (float)Math.Sqrt(distanceSquared);
+		//			distance = MathHelper.Clamp(distance, 0, spread);
+		//			byte alpha = (byte)(255 - (distance / spread) * 255);
 
-					output[x + y * width] = (uint)((alpha << 24) | 0xffffff);
-				}
-			}
+		//			output[x + y * width] = (uint)((alpha << 24) | 0xffffff);
+		//		}
+		//	}
 
-			Buffer.MemoryCopy((void*)output, (void*)input, bufferLength, bufferLength);
+		//	Buffer.MemoryCopy((void*)output, (void*)input, bufferLength, bufferLength);
 
-			Marshal.FreeHGlobal((IntPtr)output);
+		//	Marshal.FreeHGlobal((IntPtr)output);
 
-			renderGlyph.Bitmap.UnlockBits(bitmapData);
-		}
+		//	renderGlyph.Bitmap.UnlockBits(bitmapData);
+		//}
 
 		private static BFont FromFace(Face face, string characters, int size, int pageSize, Action<RenderGlyph> action = null)
 		{
@@ -123,11 +126,9 @@ namespace BFont
 			foreach (var character in singleCharacters)
 			{
 				face.LoadGlyph(face.GetCharIndex(character), LoadFlags.Default, LoadTarget.Mono);
-				face.Glyph.RenderGlyph(RenderMode.Mono);
-
-
-
-				Bitmap glyphBitmap = face.Glyph.Metrics.Height != 0 ? face.Glyph.Bitmap.ToGdipBitmap(Color.White) : new Bitmap((int)face.Glyph.Advance.X, 1);
+				face.Glyph.RenderGlyph(RenderMode.Normal);
+				
+				BBitmap glyphBitmap = face.Glyph.Metrics.Height != 0 ? BBitmap.FromFTBitmap(face.Glyph.Bitmap) : new BBitmap((int)face.Glyph.Advance.X, 0);
 
 				renderGlyphs.Add(new RenderGlyph
 				{
@@ -148,18 +149,16 @@ namespace BFont
 			renderGlyphs = renderGlyphs.OrderByDescending(g => g.Info.Height)
 				.ThenBy(g => g.Info.Character).ToList();
 
-			List<Bitmap> pages = new List<Bitmap>();
+			List<BBitmap> pages = new List<BBitmap>();
 			List<BGlyph> glyphs = new List<BGlyph>();
 			Point cursor = new Point(0, 0);
 			int maxHeight = 0;
 
-			Bitmap page;
-			Graphics graphics;
+			BBitmap page;
 
 			void CreateNewPage()
 			{
-				page = new Bitmap(pageSize, pageSize);
-				graphics = Graphics.FromImage(page);
+				page = new BBitmap(pageSize, pageSize);
 
 				pages.Add(page);
 			}
@@ -189,7 +188,7 @@ namespace BFont
 
 				glyphs.Add(renderGlyph.Info);
 
-				graphics.DrawImageUnscaled(renderGlyph.Bitmap, cursor);
+				page.Draw(renderGlyph.Bitmap, cursor.X, cursor.Y);
 
 				maxHeight = Math.Max(maxHeight, renderGlyph.Bitmap.Height);
 				cursor.X += renderGlyph.Bitmap.Width;
@@ -207,7 +206,7 @@ namespace BFont
 		private class RenderGlyph
 		{
 			public BGlyph Info { get; set; }
-			public Bitmap Bitmap { get; set; }
+			public BBitmap Bitmap { get; set; }
 		}
 	}
 

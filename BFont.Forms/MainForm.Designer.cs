@@ -1,4 +1,4 @@
-﻿namespace BFont.Forms
+﻿namespace BFontCore.Forms
 {
 	partial class MainForm
 	{
@@ -39,15 +39,18 @@
 			this.textRenderText = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.comboPageSize = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.numericSize = new System.Windows.Forms.NumericUpDown();
-			this.comboPageSize = new System.Windows.Forms.ComboBox();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.buttonExport = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericSize)).BeginInit();
+			this.groupBox5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -175,10 +178,25 @@
 			this.groupBox4.Controls.Add(this.numericSize);
 			this.groupBox4.Location = new System.Drawing.Point(750, 12);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(171, 159);
+			this.groupBox4.Size = new System.Drawing.Size(171, 72);
 			this.groupBox4.TabIndex = 4;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Settings";
+			// 
+			// comboPageSize
+			// 
+			this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboPageSize.Items.AddRange(new object[] {
+            "256",
+            "512",
+            "1024",
+            "2048",
+            "4096"});
+			this.comboPageSize.Location = new System.Drawing.Point(67, 45);
+			this.comboPageSize.Name = "comboPageSize";
+			this.comboPageSize.Size = new System.Drawing.Size(98, 21);
+			this.comboPageSize.TabIndex = 4;
+			this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
 			// 
 			// label2
 			// 
@@ -221,26 +239,31 @@
             0});
 			this.numericSize.ValueChanged += new System.EventHandler(this.numericSize_ValueChanged);
 			// 
-			// comboPageSize
+			// groupBox5
 			// 
-			this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboPageSize.Items.AddRange(new object[] {
-            "256",
-            "512",
-            "1024",
-            "2048",
-            "4096"});
-			this.comboPageSize.Location = new System.Drawing.Point(67, 47);
-			this.comboPageSize.Name = "comboPageSize";
-			this.comboPageSize.Size = new System.Drawing.Size(98, 21);
-			this.comboPageSize.TabIndex = 4;
-			this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
+			this.groupBox5.Controls.Add(this.buttonExport);
+			this.groupBox5.Location = new System.Drawing.Point(750, 90);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(171, 81);
+			this.groupBox5.TabIndex = 5;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Actions";
+			// 
+			// buttonExport
+			// 
+			this.buttonExport.Location = new System.Drawing.Point(90, 50);
+			this.buttonExport.Name = "buttonExport";
+			this.buttonExport.Size = new System.Drawing.Size(75, 23);
+			this.buttonExport.TabIndex = 0;
+			this.buttonExport.Text = "Export";
+			this.buttonExport.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(933, 783);
+			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
@@ -257,6 +280,7 @@
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericSize)).EndInit();
+			this.groupBox5.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -278,5 +302,7 @@
 		private System.Windows.Forms.NumericUpDown numericSize;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox comboPageSize;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.Button buttonExport;
 	}
 }

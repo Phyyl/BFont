@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFont.Forms", "BFont.Forms\BFont.Forms.csproj", "{4D3F5C11-C33B-4F6B-A175-DF7053C97877}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFont", "BFont\BFont.csproj", "{92A59620-F257-4B47-AB68-638DD7BBCDA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFontCore", "BFont\BFontCore.csproj", "{92A59620-F257-4B47-AB68-638DD7BBCDA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

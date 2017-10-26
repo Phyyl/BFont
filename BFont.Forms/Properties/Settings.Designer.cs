@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BFont.Forms.Properties
+namespace BFontCore.Forms.Properties
 {
 
 
