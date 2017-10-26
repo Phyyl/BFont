@@ -10,8 +10,8 @@
     <Copyright>Copyright (c) 2017 Philippe Paré</Copyright>
     <Authors>Phyyl</Authors>
     <Company />
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>Fixed Embedded library load</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Added distance field and options</PackageReleaseNotes>
     <PackageTags>font rendering bitmap ttf freetype</PackageTags>
     <FileVersion>1.0.1.0</FileVersion>
   </PropertyGroup>
