@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BFontCore
+namespace BetterFont
 {
 	public class BFont
 	{
@@ -23,7 +21,8 @@ namespace BFontCore
 
 		static BFont()
 		{
-			NativeLibraryHelper.LoadEmbeddedLibrary("BFontCore", "freetype6.dll");
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				NativeLibraryHelper.LoadEmbeddedLibrary($"BetterFont.Lib.{(IntPtr.Size == 8 ? "x64" : "x86")}", "freetype6.dll");
 
 			library = new Library();
 		}
@@ -127,7 +126,7 @@ namespace BFontCore
 			{
 				face.LoadGlyph(face.GetCharIndex(character), LoadFlags.Default, LoadTarget.Mono);
 				face.Glyph.RenderGlyph(RenderMode.Normal);
-				
+
 				BBitmap glyphBitmap = face.Glyph.Metrics.Height != 0 ? BBitmap.FromFTBitmap(face.Glyph.Bitmap) : new BBitmap((int)face.Glyph.Advance.X, 0);
 
 				renderGlyphs.Add(new RenderGlyph

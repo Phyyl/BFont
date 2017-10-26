@@ -71,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="SharpFontStandard, Version=4.0.1.200, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpFontStandard.4.0.1\lib\netstandard1.2\SharpFontStandard.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -81,9 +84,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BFont\BFontCore.csproj">
-      <Project>{92a59620-f257-4b47-ab68-638dd7bbcda8}</Project>
-      <Name>BFontCore</Name>
+    <ProjectReference Include="..\BetterFont\BetterFont.csproj">
+      <Project>{db725109-5b19-4dcc-a0b6-1f69b6c0831e}</Project>
+      <Name>BetterFont</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

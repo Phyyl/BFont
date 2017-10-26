@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace BFontCore
+namespace BetterFont
 {
 	internal static class NativeLibraryHelper
 	{
@@ -14,7 +11,7 @@ namespace BFontCore
 
 		public static void LoadLibrary(string libName)
 		{
-			NativeLoadLibrary(libName);
+			IntPtr lib = NativeLoadLibrary(libName);
 		}
 
 		public static void LoadEmbeddedLibrary(string @namespace, string libName)
@@ -28,6 +25,8 @@ namespace BFontCore
 			}
 
 			string resourceName = $"{@namespace}.{libName}";
+
+			string[] names = typeof(NativeLibraryHelper).Assembly.GetManifestResourceNames();
 
 			using (Stream stream = typeof(NativeLibraryHelper).Assembly.GetManifestResourceStream(resourceName))
 			{
